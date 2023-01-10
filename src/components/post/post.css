@@ -1,0 +1,19 @@
+.post{
+    margin: 20px 0;
+    border: 1px solid black;
+}
+.post_content{
+    text-align: center;
+    font-size: 30px;
+    font-weight: 900;
+    margin-bottom: 15px;
+}
+.post_btns{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.post_btns button{
+    font-size: 30px;
+    flex: 0 1 40%;
+}

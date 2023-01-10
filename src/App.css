@@ -1,0 +1,12 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.App{
+    padding: 20px;
+    border: 2px solid black;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}

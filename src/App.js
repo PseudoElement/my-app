@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import Counter from "./components/Counter";
+import React from "react";
+import Counter from "./components/counter/Counter";
+import Input from "./components/input/input";
+import "./App.css";
+import "./components/input/input.css";
+import "./components/post/post.css"
+import Post from "./components/post/post";
 function App() {
-  let [value, setValue] = useState("SOME TEXT IN INPUT");
   return (
     <div className="App">
-      <Counter />
-      <Counter />
-      <Counter />
-      <h1>{value}</h1>
-      <input
-        type="text"
-        value={value}
-        onChange={(event) => setValue(event.target.value)}
-      />
+      <Counter/>
+      <Input/>
+      <Post options={{type:'block1', id: 1}}/>
+      <Post options={{type:'block2', id: 2}}/>
+      <Post options={{type:'block3', id: 3}}/>
     </div>
   );
 }
