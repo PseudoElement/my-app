@@ -1,4 +1,6 @@
 .post{
+    display: flex;
+    flex-direction: column;
     margin: 20px 0;
     border: 1px solid black;
 }
@@ -16,4 +18,7 @@
 .post_btns button{
     font-size: 30px;
     flex: 0 1 40%;
+}
+.post_input{
+    font-size: 25px;
 }
