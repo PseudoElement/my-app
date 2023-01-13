@@ -8,7 +8,6 @@ import Post from "./components/post/post";
 function App() {
   let [arr, setArr] = React.useState([1, 2, 3]);
   const arrRef = React.useRef(arr);
-  console.log(arr)
   function pushArr() {
     setArr([...arr, arr[arr.length - 1] + 1]);
   }
