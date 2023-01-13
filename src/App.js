@@ -14,12 +14,11 @@ function App() {
   }
   return (
     <div className="App">
-      <button onClick={pushArr}>FOR TEST</button>
-      <Counter />
-      <Input />
-      <Post options={{ type: "block1", id: 1 }} />
-      <Post options={{ type: "block2", id: 2 }} />
-      <Post options={{ type: "block3", id: 3 }} />
+      <Counter/>
+      <Input/>
+      <Post options={{type:'block1', id: 1}}/>
+      <Post options={{type:'block2', id: 2}}/>
+      <Post options={{type:'block3', id: 3}}/>
     </div>
   );
 }
