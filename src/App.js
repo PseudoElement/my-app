@@ -5,6 +5,7 @@ import "./App.css";
 import "./components/input/input.css";
 import "./components/post/post.css";
 import Post from "./components/post/post";
+import { Image } from "./components/image";
 function App() {
   let [arr, setArr] = React.useState([1, 2, 3]);
   const arrRef = React.useRef(arr);
@@ -16,6 +17,8 @@ function App() {
       <button onClick={pushArr}>FOR TEST</button>
       <Counter/>
       <Input/>
+      <br/>
+      <Image/>
       <Post options={{type:'block1', id: 1}}/>
       <Post options={{type:'block2', id: 2}}/>
       <Post options={{type:'block3', id: 3}}/>
