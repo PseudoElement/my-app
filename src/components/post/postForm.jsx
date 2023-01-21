@@ -1,35 +1,46 @@
 import React, { useState } from "react";
+import { uuidv4 } from "../../utils/UUID";
 
-export function PostForm(props) {
-  const [post, setPost] = useState({ text: "" });
-  const [inputValue, setInputValue] = useState("");
+export function PostForm({ create, deletePost }) {
+  const [post, setPost] = useState({ text: "", title: "" });
+  const [textValue, setInputValue] = useState("");
+  const [titleValue, setTitleValue] = useState("");
   function addPost(e) {
     e.preventDefault();
-    if(!inputValue) return;
+    if (!textValue || !titleValue) return;
     const newPost = {
       ...post,
-      id: Date.now(),
+      id: uuidv4(),
     };
-    props.create(newPost);
+    create(newPost);
     setInputValue("");
-  }
-  function deletePost(e){
-    e.preventDefault();
+    setTitleValue("");
   }
   return (
     <form>
       <input
+        placeholder="...title"
+        onChange={(e) => {
+          setTitleValue(e.target.value);
+          setPost({ ...post, title: e.target.value });
+        }}
+        type="text"
+        value={titleValue}
+        className="post_input"
+      />
+      <input
+        placeholder="...text"
         onChange={(e) => {
           setInputValue(e.target.value);
-          setPost({ text: e.target.value });
+          setPost({ ...post, text: e.target.value });
         }}
         className="post_input"
         type="text"
-        value={inputValue}
+        value={textValue}
       />
       <div className="post_btns">
         <button onClick={(e) => addPost(e)}>Add</button>
-        <button onClick={e=> deletePost(e)} style={{ background: props.id === 2 ? "green" : "red" }}>
+        <button onClick={(e) => deletePost(e)} style={{ background: "red" }}>
           Delete
         </button>
       </div>

@@ -22,3 +22,11 @@
 .post_input{
     font-size: 25px;
 }
+button.deleteFully{
+    font-size: 40px;
+    margin: 20px;
+}
+select{
+    font-size: 25px;
+    margin: 20px;
+}

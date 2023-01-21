@@ -6,22 +6,26 @@ import "./components/input/input.css";
 import "./components/post/post.css";
 import Post from "./components/post/post";
 import { Image } from "./components/image";
+import { uuidv4 } from "./utils/UUID";
+import { Button } from "./components/button/Button";
 function App() {
-  let [arr, setArr] = React.useState([1, 2, 3]);
-  const arrRef = React.useRef(arr);
-  function pushArr() {
-    setArr([...arr, arr[arr.length - 1] + 1]);
+  const [arrPosts, setArrPosts] = React.useState([
+    <Post key={uuidv4()} deleteFully={deleteFully} id={uuidv4()} />,
+    <Post key={uuidv4()} deleteFully={deleteFully} id={uuidv4()} />,
+    <Post key={uuidv4()} deleteFully={deleteFully} id={uuidv4()} />,
+  ]);
+  function deleteFully(id) {
+    setArrPosts((prev) => prev.filter((el) => el.props.id !== id));
   }
+  React.useEffect(() => {
+  }, [arrPosts]);
   return (
     <div className="App">
-      <button onClick={pushArr}>FOR TEST</button>
-      <Counter/>
-      <Input/>
-      <br/>
-      <Image/>
-      <Post options={{type:'block1', id: 1}}/>
-      <Post options={{type:'block2', id: 2}}/>
-      <Post options={{type:'block3', id: 3}}/>
+      <Counter />
+      <Input />
+      <br />
+      <Image />
+      {arrPosts.map((item) => item)}
     </div>
   );
 }
