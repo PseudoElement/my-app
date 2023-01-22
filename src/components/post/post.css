@@ -45,3 +45,7 @@ select {
   opacity: 0;
   transition: opacity 500ms ease-in;
 }
+.MuiPaper-root {
+  margin: 20px;
+}
+

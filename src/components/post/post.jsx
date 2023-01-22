@@ -12,7 +12,8 @@ function Post(props) {
   const { posts, loading, setPosts } = usePosts();
   const [selectedSort, setSelectedSort] = React.useState("");
   function createPost(newPost) {
-    setPosts([...posts, newPost]);
+    const arrId = posts.map(el=> el.id);
+    setPosts([...posts, {...newPost, id: Math.max.apply(null, arrId) + 1}]);
   }
   function deletePost(e) {
     e.preventDefault();

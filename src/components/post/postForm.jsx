@@ -8,16 +8,22 @@ export function PostForm({ create, deletePost }) {
   const [post, setPost] = useState({ body: "", title: "" });
   const [textValue, setInputValue] = useState("");
   const [titleValue, setTitleValue] = useState("");
-  const {updatePosts, error } = usePosts();
+  const {updatePosts, error, setError, setLoading } = usePosts();
   async function addPost(e) {
     e.preventDefault();
-    if (!textValue || !titleValue) return;
+    if (!textValue || !titleValue){
+      setError('Fill all fields.')
+      return;
+    };
+    setLoading(true)
     const newPost = {
       ...post
     };
     updatePosts(newPost).then((res) => create(res));
     setInputValue("");
     setTitleValue("");
+    setError("")
+    setLoading(false);
   }
   return (
     <form>
