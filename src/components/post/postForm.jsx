@@ -1,18 +1,21 @@
+// import axios from "axios";
 import React, { useState } from "react";
-import { uuidv4 } from "../../utils/UUID";
+import { usePosts } from "../../utils/getPosts";
+// import { uuidv4 } from "../../utils/UUID";
+import { CustomError } from "../errors/error1";
 
 export function PostForm({ create, deletePost }) {
-  const [post, setPost] = useState({ text: "", title: "" });
+  const [post, setPost] = useState({ body: "", title: "" });
   const [textValue, setInputValue] = useState("");
   const [titleValue, setTitleValue] = useState("");
-  function addPost(e) {
+  const {updatePosts, error } = usePosts();
+  async function addPost(e) {
     e.preventDefault();
     if (!textValue || !titleValue) return;
     const newPost = {
-      ...post,
-      id: uuidv4(),
+      ...post
     };
-    create(newPost);
+    updatePosts(newPost).then((res) => create(res));
     setInputValue("");
     setTitleValue("");
   }
@@ -32,12 +35,13 @@ export function PostForm({ create, deletePost }) {
         placeholder="...text"
         onChange={(e) => {
           setInputValue(e.target.value);
-          setPost({ ...post, text: e.target.value });
+          setPost({ ...post, body: e.target.value });
         }}
         className="post_input"
         type="text"
         value={textValue}
       />
+      {error && <CustomError errorText={error} />}
       <div className="post_btns">
         <button onClick={(e) => addPost(e)}>Add</button>
         <button onClick={(e) => deletePost(e)} style={{ background: "red" }}>

@@ -7,7 +7,6 @@ import "./components/post/post.css";
 import Post from "./components/post/post";
 import { Image } from "./components/image";
 import { uuidv4 } from "./utils/UUID";
-import { Button } from "./components/button/Button";
 function App() {
   const [arrPosts, setArrPosts] = React.useState([
     <Post key={uuidv4()} deleteFully={deleteFully} id={uuidv4()} />,

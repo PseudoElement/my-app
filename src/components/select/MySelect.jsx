@@ -1,5 +1,4 @@
 import React from 'react';
-import { uuidv4 } from '../../utils/UUID';
 export function Select({options, defaultValue, selectSort, value}){
     return(
         <select value={value} onChange={e=> selectSort(e.target.value)}>
