@@ -1,7 +1,7 @@
 .post {
   display: flex;
   flex-direction: column;
-  margin: 20px 0;
+  margin: 20px auto;
   border: 1px solid black;
 }
 .post_content {
@@ -48,4 +48,6 @@ select {
 .MuiPaper-root {
   margin: 20px;
 }
-
+nav {
+  align-self: center !important;
+}

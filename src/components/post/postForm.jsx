@@ -15,11 +15,11 @@ export function PostForm({ create, deletePost }) {
       setError('Fill all fields.')
       return;
     };
-    setLoading(true)
     const newPost = {
       ...post
     };
-    updatePosts(newPost).then((res) => create(res));
+    setLoading(true);
+   await updatePosts(newPost).then((res) => create(res));
     setInputValue("");
     setTitleValue("");
     setError("")

@@ -4,38 +4,50 @@ export function usePosts() {
   const [loading, setLoading] = React.useState(false);
   const [posts, setPosts] = React.useState([]);
   const [error, setError] = React.useState("");
-  async function getPosts() {
+  const [page, setPage] = React.useState(1);
+  const [limit, setLimit] = React.useState(7)
+  const [totalPagesCount, setTotalPagesCount] = React.useState(0);
+  async function getPosts(limit = 10, page = 1) {
     try {
       setError("");
       setLoading(true);
       const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/posts?_limit=10"
+        "https://jsonplaceholder.typicode.com/posts",
+        {
+          params: {
+            _limit: limit,
+            _page: page,
+          },
+        }
       );
+      setTotalPagesCount(response.headers['x-total-count'])
       setPosts(response.data);
     } catch (e) {
       setError(e.message);
-    }finally{
-        setLoading(false);
+    } finally {
+      setLoading(false);
     }
   }
-  async function updatePosts(newPost){
+
+  async function updatePosts(newPost) {
     try {
-        setLoading(true);
-        setError("");
-        const response = await axios.post(
-          "https://jsonplaceholder.typicode.com/posts?_limit=10",
-          newPost
-        );
-        console.log(response.data)
-        return response.data;
-      } catch (e) {
-        setError(e.message);
-      }finally{
-        setLoading(false);
-      }
+      setLoading(true);
+      setError("");
+      const response = await axios.post(
+        "https://jsonplaceholder.typicode.com/posts?_limit=10",
+        newPost
+      );
+      return response.data;
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setLoading(false);
+    }
   }
+
+ 
   React.useEffect(() => {
-    getPosts();
+    getPosts(limit, page);
   }, []);
-  return {posts, error, loading, setPosts, setError, setLoading, updatePosts}
+  return { posts, error, loading, setPosts, setError, setLoading, updatePosts, setPage, getPosts, totalPagesCount, limit };
 }
