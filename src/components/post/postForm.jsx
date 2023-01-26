@@ -1,7 +1,5 @@
-// import axios from "axios";
 import React, { useState } from "react";
 import { usePosts } from "../../utils/getPosts";
-// import { uuidv4 } from "../../utils/UUID";
 import { CustomError } from "../errors/error1";
 
 export function PostForm({ create, deletePost }) {

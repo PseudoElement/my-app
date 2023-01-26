@@ -48,6 +48,6 @@ export function usePosts() {
  
   React.useEffect(() => {
     getPosts(limit, page);
-  }, []);
-  return { posts, error, loading, setPosts, setError, setLoading, updatePosts, setPage, getPosts, totalPagesCount, limit };
+  }, [limit, page]);
+  return { posts, error, loading, setPosts, setError, setLoading, updatePosts, setPage, getPosts, totalPagesCount, limit, setLimit };
 }

@@ -64,10 +64,7 @@ function Post(props) {
         <Pagination
           onChange={(e, page) => {
             getPosts(limit, page);
-            const coordY =
-              e.target.closest(".post").offsetTop +
-              e.target.closest(".post").offsetHeight -
-              window.innerHeight;
+            const coordY = e.target.closest(".post").offsetTop;
             window.scrollTo(0, coordY);
           }}
           size="large"

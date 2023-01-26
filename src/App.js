@@ -1,31 +1,19 @@
 import React from "react";
-import Counter from "./components/counter/Counter";
-import Input from "./components/input/input";
+import { BrowserRouter, Route, Routes, } from "react-router-dom";
+import { CustomLoader } from "./components/loaders/loader1";
 import "./App.css";
-import "./components/input/input.css";
-import "./components/post/post.css";
-import Post from "./components/post/post";
-import { Image } from "./components/image";
-import { uuidv4 } from "./utils/UUID";
-function App() {
-  const [arrPosts, setArrPosts] = React.useState([
-    <Post key={uuidv4()} deleteFully={deleteFully} id={uuidv4()} />,
-    <Post key={uuidv4()} deleteFully={deleteFully} id={uuidv4()} />,
-    <Post key={uuidv4()} deleteFully={deleteFully} id={uuidv4()} />,
-  ]);
-  function deleteFully(id) {
-    setArrPosts((prev) => prev.filter((el) => el.props.id !== id));
-  }
-  React.useEffect(() => {
-  }, [arrPosts]);
+import { About } from "./pages/About";
+import Posts from "./pages/Posts";
+import { MyError } from "./pages/Error";
+export function App() {
   return (
-    <div className="App">
-      <Counter />
-      <Input />
-      <br />
-      <Image />
-      {arrPosts.map((item) => item)}
-    </div>
+    <BrowserRouter>
+        <Routes>
+          <Route loader={CustomLoader} path="/" element={<Posts />} />
+          <Route loader={CustomLoader} path="/about" element={<About />} />
+          <Route path ='*' element={<MyError/>} />
+        </Routes>
+    </BrowserRouter>
   );
 }
 export default App;
