@@ -2,20 +2,18 @@ import React, { useRef } from "react";
 import { useState } from "react";
 import "./input.css";
 function Input(props) {
-  let [value, setValue] = useState("SOME TEXT IN INPUT");
-  function changeH1Value(e) {
-    setValue(e.target.value);
-  }
+  let [value, setValue] = useState("");
   const mainInputRef = useRef();
   return (
     <>
-      <h1>{value}</h1>
       <input
-      ref={mainInputRef}
+        style={{ maxWidth: 300 }}
+        ref={mainInputRef}
         className="myInput"
-        type="text"
+        placeholder={props.placeholder}
+        type={props.type ? props.type : "text"}
         value={value}
-        onChange={changeH1Value}
+        onChange={(e) => setValue(e.target.value)}
       />
     </>
   );

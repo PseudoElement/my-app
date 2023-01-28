@@ -7,16 +7,18 @@ import Post from "../components/post/post";
 import { Image } from "../components/image";
 import { uuidv4 } from "../utils/UUID";
 import { Navigation } from "../components/nav/Navigation";
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
+import { useAuth } from "../context/AuthContext";
+
 function Posts() {
+  const { isAuth } = useAuth();
   const [arrPosts, setArrPosts] = React.useState([
-    <Post key={uuidv4()} deleteFully={deleteFully} id={uuidv4()} />,
-    <Post key={uuidv4()} deleteFully={deleteFully} id={uuidv4()} />,
     <Post key={uuidv4()} deleteFully={deleteFully} id={uuidv4()} />,
   ]);
   function deleteFully(id) {
     setArrPosts((prev) => prev.filter((el) => el.props.id !== id));
   }
-  React.useEffect(() => {}, [arrPosts]);
   return (
     <div className="App">
       <Navigation />

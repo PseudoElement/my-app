@@ -7,12 +7,13 @@ export function usePosts() {
   const [page, setPage] = React.useState(1);
   const [limit, setLimit] = React.useState(7)
   const [totalPagesCount, setTotalPagesCount] = React.useState(0);
+  const URL = "https://jsonplaceholder.typicode.com/posts";
   async function getPosts(limit = 10, page = 1) {
     try {
       setError("");
       setLoading(true);
       const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/posts",
+        URL,
         {
           params: {
             _limit: limit,
@@ -34,7 +35,7 @@ export function usePosts() {
       setLoading(true);
       setError("");
       const response = await axios.post(
-        "https://jsonplaceholder.typicode.com/posts?_limit=10",
+        `${URL}?_limit=10`,
         newPost
       );
       return response.data;
@@ -45,9 +46,22 @@ export function usePosts() {
     }
   }
 
+  async function getPost(id){
+    try{
+      setError('');
+      setLoading(true);
+      const response = await fetch(`${URL}/${id}`);
+      const post  = await response.json()
+      return post;
+    }catch(e){
+      setError(e.message);
+    }finally {
+      setLoading(false);
+    }
+  }
  
   React.useEffect(() => {
     getPosts(limit, page);
   }, [limit, page]);
-  return { posts, error, loading, setPosts, setError, setLoading, updatePosts, setPage, getPosts, totalPagesCount, limit, setLimit };
+  return { posts, error, loading, setPosts, setError, setLoading, updatePosts, setPage, getPosts, totalPagesCount, limit, setLimit, getPost };
 }

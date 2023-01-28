@@ -1,5 +1,4 @@
 import { Button } from "@mui/material";
-import { ErrorBoundary } from "react-error-boundary";
 import { Link } from "react-router-dom";
 
 export function MyError() {

@@ -7,14 +7,30 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { PostItem } from "./postItem";
 import { usePosts } from "../../utils/getPosts";
 import { CustomLoader } from "../loaders/loader1";
-import { Pagination } from "@mui/material";
+import {
+  Button,
+  Input,
+  Pagination,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+} from "@mui/material";
 import { getPageCount } from "../../utils/getPagesCount";
 
 function Post(props) {
   const { deleteFully, id } = props;
-  const { posts, loading, setPosts, getPosts, totalPagesCount, limit } =
-    usePosts();
+  const {
+    posts,
+    loading,
+    setPosts,
+    getPosts,
+    totalPagesCount,
+    limit,
+    setLimit,
+  } = usePosts();
   const [selectedSort, setSelectedSort] = React.useState("");
+  const [choice, setChoice] = React.useState("");
+  const inputRef = React.useRef();
 
   function createPost(newPost) {
     const arrId = posts.map((el) => el.id);
@@ -32,6 +48,12 @@ function Post(props) {
     setSelectedSort(sort);
   }
 
+  function changeLimit() {
+    const value = inputRef.current.querySelector(`input`).value;
+    console.log(choice);
+    setLimit(value);
+  }
+
   React.useEffect(() => {
     setPosts([...posts].sort((a, b) => compare(a, b, selectedSort))); ///!!!!!!!!!!!!!!!!!!!!!!
   }, [selectedSort]); //////СНАЧАЛА ДЕСТРУКТУРИРОВАТЬ СТАРЫЙ МАССИВ, потом сортировать
@@ -44,14 +66,28 @@ function Post(props) {
         options={[
           { name: "By text", value: "body" },
           { name: "By title", value: "title" },
+          { name: "By count", value: "id" },
         ]}
         defaultValue={"Sort"}
       />
-
+      <Input
+        ref={inputRef}
+        style={{ maxWidth: 100 }}
+        type="number"
+        defaultValue={7}
+        slotProps={{ input: { min: 1, max: 10, step: 1 } }}
+      />
+      <Button variant="outlined" color="success" onClick={changeLimit}>
+        Change limit
+      </Button>
+      <RadioGroup>
+        <FormControlLabel value="female" control={<Radio />} label="Female" onChange={e=> setChoice(e.target.value)}/>
+        <FormControlLabel value="male" control={<Radio />} label="Male" onChange={e=> setChoice(e.target.value)}/>
+      </RadioGroup>
       {loading && <CustomLoader />}
 
       <TransitionGroup>
-        {posts.map((post, index) => {
+        {posts.map((post) => {
           return (
             <CSSTransition key={post.id} timeout={500} classNames="post">
               <PostItem id={post.id} title={post.title} text={post.body} />
